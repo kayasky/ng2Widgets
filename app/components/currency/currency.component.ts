@@ -19,8 +19,18 @@ export class CurrencyComponent {
     this.amountTwo = 0;
     this.currencyOne = 'CAD';
     this.currencyTwo = 'USD';
-    this.exchangeService.getRates('USD').subscribe(rates => {
-      console.log(rates);
-    })
+  }
+
+  convertFirst(amount: number, currency: string) {
+    console.log(amount, currency);
+    this.exchangeService.getRates(currency).subscribe(resp => {
+      this.amountOne = resp.rates[this.currencyOne] * amount;
+    });
+  }
+
+  convertSecond(amount: number, currency: string) {
+    this.exchangeService.getRates(currency).subscribe(resp => {
+      this.amountTwo = resp.rates[this.currencyTwo] * amount;
+    });
   }
 }

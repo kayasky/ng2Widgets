@@ -12,9 +12,9 @@ export class ExchangeService {
 
   getRates(base: string) {
     let params = new URLSearchParams();
-    params.set('base', base); // the user's search value
-
-    return this.http.get('http://api.fixer.io/latest', params)
-      .map(res => res.json());
+    params.set('base', base);
+    return this.http.get('http://api.fixer.io/latest', {
+      search: params
+    }).map(res => res.json());
   }
 }
