@@ -1,0 +1,15 @@
+<form>
+  <label>Type in amount and select currency:</label><br />
+  <input type="text" name="amountOne" [(ngModel)]="amountOne" />
+  <select [(ngModel)]="currencyOne" name="currencOne">
+    <option value="CAD">CAD</option>
+    <option value="USD">USD</option>
+  </select>
+  <br />
+  <label>Converted amount:</label><br />
+  <input type="text" name="amountTwo" [(ngModel)]="amountTwo" />
+  <select [(ngModel)]="currencyTwo" name="currencyTwo">
+    <option value="USD">CAD</option>
+    <option value="CAD">USD</option>
+  </select>
+</form>
