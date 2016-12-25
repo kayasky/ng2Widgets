@@ -15,22 +15,42 @@ export class CurrencyComponent {
   currencyTwo: string;
 
   constructor(private exchangeService: ExchangeService) {
-    this.amountOne = 0;
+    this.amountOne = 1;
     this.amountTwo = 0;
     this.currencyOne = 'CAD';
     this.currencyTwo = 'USD';
+    this.convertSecond(this.amountOne, this.currencyOne);
+  }
+
+  convert(amount: number, fromCurrency: string, toCurrency: string) {
+    let promise = new Promise((resolve, reject) => {
+      this.exchangeService.getRates(fromCurrency).subscribe(resp => {
+        let converted = resp.rates[toCurrency] * amount;
+        resolve(converted);
+      }, err => {
+        reject(err);
+      });
+    });
+    return promise;
   }
 
   convertFirst(amount: number, currency: string) {
-    console.log(amount, currency);
-    this.exchangeService.getRates(currency).subscribe(resp => {
-      this.amountOne = resp.rates[this.currencyOne] * amount;
-    });
+    if (currency === this.currencyOne) {
+      this.amountTwo = this.amountOne;
+    } else {
+      this.convert(amount, currency, this.currencyOne).then(response => {
+        this.amountOne = response;
+      });
+    }
   }
 
   convertSecond(amount: number, currency: string) {
-    this.exchangeService.getRates(currency).subscribe(resp => {
-      this.amountTwo = resp.rates[this.currencyTwo] * amount;
-    });
+    if (currency === this.currencyTwo) {
+      this.amountOne = this.amountTwo;
+    } else {
+      this.convert(amount, currency, this.currencyTwo).then(response => {
+        this.amountTwo = response;
+      });
+    }
   }
 }
