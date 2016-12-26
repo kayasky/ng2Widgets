@@ -1,31 +1,19 @@
 <form>
   <label>Type in amount and select currency:</label><br />
-  <input
-    type="number"
-    name="amountOne"
-    (ngModelChange)="convertSecond(amountOne, currencyOne)"
-    [(ngModel)]="amountOne" />
-  <select
-    (ngModelChange)="convertSecond(amountOne, currencyOne)"
-    [(ngModel)]="currencyOne"
-    name="currencOne">
-    <option *ngFor="let currency of currencies" [value]="currency">
-        {{currency}}
-    </option>
-  </select>
-  <br />
-  <label>Converted amount:</label><br />
-  <input
-    type="number"
-    name="amountTwo"
-    (ngModelChange)="convertFirst(amountTwo, currencyTwo)"
-    [(ngModel)]="amountTwo" />
-  <select
-    [(ngModel)]="currencyTwo"
-    (ngModelChange)="convertFirst(amountTwo, currencyTwo)"
-    name="currencyTwo">
-    <option *ngFor="let currency of currencies" [value]="currency">
-        {{currency}}
-    </option>
-  </select>
+  <div *ngFor="let amount of amounts; let i = index;">
+      <input
+        type="text"
+        name="amount_{{ i }}_value"
+        (ngModelChange)="convertAmount(i, amounts, $event, amount.currency)"
+        [(ngModel)]="amount.value" />
+      <select
+        name="amount_{{ i }}_currency"
+        (ngModelChange)="convertAmount(i, amounts, amount.value, $event)"
+        [(ngModel)]="amount.currency">
+        <option *ngFor="let currency of currencies" value="{{currency}}">
+            {{currency}}
+        </option>
+      </select>
+      <br />
+  </div>
 </form>

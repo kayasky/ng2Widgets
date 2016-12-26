@@ -11,10 +11,7 @@ const precision = 2;
 })
 
 export class CurrencyComponent {
-  amountOne: number;
-  amountTwo: number;
-  currencyOne: string;
-  currencyTwo: string;
+  amounts: Amount[];
   currencies: string[];
 
   constructor(private exchangeService: ExchangeService) {
@@ -22,19 +19,24 @@ export class CurrencyComponent {
   }
 
   ngOnInit() {
-    this.amountOne = 1;
-    this.amountTwo = 0;
-    this.currencyOne = 'CAD';
-    this.currencyTwo = 'USD';
+    this.amounts = [
+      {
+        value: 1,
+        currency: 'CAD'
+      }, {
+        value: 0,
+        currency: 'USD'
+      }
+    ];
+
     this.currencies = ['CAD', 'USD', 'EUR'];
-    this.convertSecond(this.amountOne, this.currencyOne);
+    this.convertAmount(0, this.amounts, this.amounts[0].value, this.amounts[0].currency);
   }
 
-  convert(amount: number = 0, fromCurrency: string, toCurrency: string) {
+  convert(fromCurrency: string) {
     let promise = new Promise((resolve, reject) => {
       this.exchangeService.getRates(fromCurrency).subscribe(resp => {
-        let converted = resp.rates[toCurrency] * amount;
-        resolve(converted.toFixed(precision));
+        resolve(resp);
       }, err => {
         reject(err);
       });
@@ -42,23 +44,24 @@ export class CurrencyComponent {
     return promise;
   }
 
-  convertFirst(amount: number, currency: string) {
-    if (currency === this.currencyOne) {
-      this.amountTwo = this.amountOne;
-    } else {
-      this.convert(amount, currency, this.currencyOne).then(response => {
-        this.amountOne = response;
+  convertAmount(index: number, amounts: Amount[], fromValue: number, fromCurrency: string) {
+    this.convert(fromCurrency).then(response => {
+      amounts.forEach((item: any, i) => {
+        if (i !== index) {
+          item.value = 0;
+          if (item.currency === fromCurrency) {
+            item.value = fromValue;
+          } else {
+            let converted = response.rates[item.currency] * fromValue;
+            item.value = converted.toFixed(precision);
+          }
+        }
       });
-    }
+    });
   }
+}
 
-  convertSecond(amount: number, currency: string) {
-    if (currency === this.currencyTwo) {
-      this.amountOne = this.amountTwo;
-    } else {
-      this.convert(amount, currency, this.currencyTwo).then(response => {
-        this.amountTwo = response;
-      });
-    }
-  }
+interface Amount {
+  value: number;
+  currency: string;
 }
