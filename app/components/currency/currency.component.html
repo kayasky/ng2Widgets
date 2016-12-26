@@ -3,29 +3,29 @@
   <input
     type="number"
     name="amountOne"
-    (change)="convertSecond(amountOne, currencyOne)"
+    (ngModelChange)="convertSecond(amountOne, currencyOne)"
     [(ngModel)]="amountOne" />
   <select
-    (change)="convertSecond(amountOne, currencyOne)"
+    (ngModelChange)="convertSecond(amountOne, currencyOne)"
     [(ngModel)]="currencyOne"
     name="currencOne">
-    <option value="CAD">CAD</option>
-    <option value="USD">USD</option>
-    <option value="EUR">EUR</option>
+    <option *ngFor="let currency of currencies" [value]="currency">
+        {{currency}}
+    </option>
   </select>
   <br />
   <label>Converted amount:</label><br />
   <input
     type="number"
     name="amountTwo"
-    (change)="convertFirst(amountTwo, currencyTwo)"
+    (ngModelChange)="convertFirst(amountTwo, currencyTwo)"
     [(ngModel)]="amountTwo" />
   <select
     [(ngModel)]="currencyTwo"
-    (change)="convertFirst(amountTwo, currencyTwo)"
+    (ngModelChange)="convertFirst(amountTwo, currencyTwo)"
     name="currencyTwo">
-    <option value="USD">USD</option>
-    <option value="CAD">CAD</option>
-    <option value="EUR">EUR</option>
+    <option *ngFor="let currency of currencies" [value]="currency">
+        {{currency}}
+    </option>
   </select>
 </form>

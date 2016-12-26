@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ExchangeService } from '../../services/exchange.service';
 
+const precision = 2;
+
 @Component({
   moduleId: module.id,
   selector: 'currency',
@@ -13,20 +15,26 @@ export class CurrencyComponent {
   amountTwo: number;
   currencyOne: string;
   currencyTwo: string;
+  currencies: string[];
 
   constructor(private exchangeService: ExchangeService) {
+    'ngInit';
+  }
+
+  ngOnInit() {
     this.amountOne = 1;
     this.amountTwo = 0;
     this.currencyOne = 'CAD';
     this.currencyTwo = 'USD';
+    this.currencies = ['CAD', 'USD', 'EUR'];
     this.convertSecond(this.amountOne, this.currencyOne);
   }
 
-  convert(amount: number, fromCurrency: string, toCurrency: string) {
+  convert(amount: number = 0, fromCurrency: string, toCurrency: string) {
     let promise = new Promise((resolve, reject) => {
       this.exchangeService.getRates(fromCurrency).subscribe(resp => {
         let converted = resp.rates[toCurrency] * amount;
-        resolve(converted);
+        resolve(converted.toFixed(precision));
       }, err => {
         reject(err);
       });
