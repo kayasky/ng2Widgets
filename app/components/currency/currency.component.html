@@ -2,7 +2,7 @@
   <label>Type in amount and select currency:</label><br />
   <div *ngFor="let amount of amounts; let i = index;">
       <input
-        type="text"
+        type="number"
         name="amount_{{ i }}_value"
         (ngModelChange)="convertAmount(i, amounts, $event, amount.currency)"
         [(ngModel)]="amount.value" />
