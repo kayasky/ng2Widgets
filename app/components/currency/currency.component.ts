@@ -50,7 +50,7 @@ export class CurrencyComponent {
     this.convertAmount(0, this.amounts, this.amounts[0].value, this.amounts[0].currency);
   }
 
-  convert(fromCurrency: string) {
+  getExchangeRates(fromCurrency: string) {
     let promise = new Promise((resolve, reject) => {
       this.exchangeService.getRates(fromCurrency).subscribe(resp => {
         resolve(resp);
@@ -62,7 +62,7 @@ export class CurrencyComponent {
   }
 
   convertAmount(index: number, amounts: Amount[], fromValue: number, fromCurrency: string) {
-    this.convert(fromCurrency).then(response => {
+    this.getExchangeRates(fromCurrency).then(response => {
       amounts.forEach((item: any, i) => {
         if (i !== index) {
           item.value = 0;
