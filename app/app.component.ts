@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'my-app',
-  template: `<currency></currency>`,
+  moduleId: module.id,
+  templateUrl: 'app.component.html'
 })
 export class AppComponent  {}

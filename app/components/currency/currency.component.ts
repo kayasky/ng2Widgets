@@ -1,7 +1,16 @@
 import { Component } from '@angular/core';
 import { ExchangeService } from '../../services/exchange.service';
 
-const precision = 2;
+const precision = 2; // How many decimal places do we want
+const cr = {
+  eur: 'EUR',
+  cad: 'CAD',
+  usd: 'USD',
+  aud: 'AUD',
+  gbp: 'GBP',
+  inr: 'INR',
+  jpy: 'JPY'
+}; // Store all currency codes in this constant
 
 @Component({
   moduleId: module.id,
@@ -22,14 +31,22 @@ export class CurrencyComponent {
     this.amounts = [
       {
         value: 1,
-        currency: 'CAD'
+        currency: cr.cad
       }, {
         value: 0,
-        currency: 'USD'
+        currency: cr.usd
+      }, {
+        value: 0,
+        currency: cr.eur
+      }, {
+        value: 0,
+        currency: cr.aud
+      }, {
+        value: 0,
+        currency: cr.gbp
       }
     ];
-
-    this.currencies = ['CAD', 'USD', 'EUR'];
+    this.currencies = [cr.cad, cr.usd, cr.eur, cr.aud, cr.gbp];
     this.convertAmount(0, this.amounts, this.amounts[0].value, this.amounts[0].currency);
   }
 

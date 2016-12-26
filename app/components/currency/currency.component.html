@@ -1,19 +1,37 @@
-<form>
-  <label>Type in amount and select currency:</label><br />
-  <div *ngFor="let amount of amounts; let i = index;">
-      <input
-        type="number"
-        name="amount_{{ i }}_value"
-        (ngModelChange)="convertAmount(i, amounts, $event, amount.currency)"
-        [(ngModel)]="amount.value" />
-      <select
-        name="amount_{{ i }}_currency"
-        (ngModelChange)="convertAmount(i, amounts, amount.value, $event)"
-        [(ngModel)]="amount.currency">
-        <option *ngFor="let currency of currencies" value="{{currency}}">
-            {{currency}}
-        </option>
-      </select>
-      <br />
-  </div>
-</form>
+<md-card class="currency-card">
+  <md-card-header>
+    <md-card-title class="currency-card-title">Type in amount and select currency</md-card-title>
+  </md-card-header>
+
+  <md-card-content>
+    <form>
+      <md-list>
+
+        <md-list-item *ngFor="let amount of amounts; let i = index;">
+
+          <md-input-container class="list-item-cell">
+            <input md-input
+              type="number"
+              placeholder="Enter amount"
+              name="amount_{{ i }}_value"
+              (ngModelChange)="convertAmount(i, amounts, $event, amount.currency)"
+              [(ngModel)]="amount.value"/>
+          </md-input-container>
+
+          <md-select
+            placeholder="Select currency"
+            name="amount_{{ i }}_currency"
+            (ngModelChange)="convertAmount(i, amounts, amount.value, $event)"
+            [(ngModel)]="amount.currency">
+            <md-option *ngFor="let currency of currencies" [value]="currency">
+              {{ currency }}
+            </md-option>
+          </md-select>
+
+        </md-list-item>
+
+      </md-list>
+    </form>
+  </md-card-content>
+
+</md-card>
