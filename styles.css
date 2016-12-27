@@ -7,17 +7,17 @@ body {
     height: 5px;
 }
 
-.currency-card {
+.widget-card {
     width: 360px;
     margin: 20px auto;
 }
 
-.currency-card .md-card-header-text {
+.widget-card .md-card-header-text {
     text-align: center;
     margin: auto;
 }
 
-.currency-card .md-list-item {
+.widget-card .md-list-item {
     margin-bottom: 15px;
 }
 

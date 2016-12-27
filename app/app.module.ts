@@ -6,10 +6,11 @@ import { MaterialModule } from '@angular/material';
 
 import { AppComponent }  from './app.component';
 import { CurrencyComponent }  from './components/currency/currency.component';
+import { WeatherComponent }  from './components/weather/weather.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpModule, MaterialModule.forRoot()],
-  declarations: [AppComponent, CurrencyComponent],
+  declarations: [AppComponent, CurrencyComponent, WeatherComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
