@@ -1,8 +1,8 @@
-# Currency Converter
+# ng2Widgets
 
-This Angular 2 based app allows you to convert currencies based on exchange rates provided by <a href="http://fixer.io/">fixer.io</a>.
+This Angular 2 + typescript + Angular Material 2 playground.
 
-![currency converter screenshot](preview.png)
+<img src="preview.png" alt="Widgets Preview" style="width: 500px;"/>
 
 ## Prerequisites
 
