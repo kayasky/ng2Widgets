@@ -1,5 +1,6 @@
 {
   "rules": {
+    "no-any": false,
     "class-name": true,
     "comment-format": [
       true,
@@ -71,8 +72,7 @@
       "allow-null-check"
     ],
     "typedef-whitespace": [
-      true,
-      {
+      true, {
         "call-signature": "nospace",
         "index-signature": "nospace",
         "parameter": "nospace",

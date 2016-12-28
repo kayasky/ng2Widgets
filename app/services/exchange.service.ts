@@ -3,6 +3,8 @@ import { Http } from '@angular/http';
 import { Jsonp, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+const basePath = 'http://api.fixer.io/latest'
+
 @Injectable()
 
 export class ExchangeService {
@@ -13,7 +15,7 @@ export class ExchangeService {
   getRates(base: string) {
     let params = new URLSearchParams();
     params.set('base', base);
-    return this.http.get('http://api.fixer.io/latest', {
+    return this.http.get(basePath, {
       search: params
     }).map(res => res.json());
   }
