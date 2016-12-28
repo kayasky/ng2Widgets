@@ -2,7 +2,7 @@
 
 This Angular 2 + typescript + Angular Material 2 playground.
 
-<img src="preview.png" alt="Widgets Preview" style="width: 500px;"/>
+<img src="preview.png" alt="Widgets Preview" width="500px"/>
 
 ## Prerequisites
 
