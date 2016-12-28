@@ -1,11 +1,17 @@
 <md-card class="widget-card">
   <md-card-header>
     <md-card-title class="widget-card-title">Weather</md-card-title>
+    <md-card-subtitle>{{ weatherConditions?.name }}</md-card-subtitle>
   </md-card-header>
 
   <md-card-content>
     <md-list>
-      {{ weatherConditions | json }}
+      <md-list-item>
+        <h4 md-line>Current Conditions</h4>
+        <p md-line>
+          {{ weatherConditions?.main.temp | temperature:'C' }}
+        </p>
+      </md-list-item>
     </md-list>
   </md-card-content>
 

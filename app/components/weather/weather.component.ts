@@ -9,15 +9,14 @@ import { WeatherService } from '../../services/weather.service';
 })
 
 export class WeatherComponent {
+  weatherConditions: any;
 
   constructor(private weatherService: WeatherService) {
     'ngInit';
   }
 
   ngOnInit() {
-    this.weatherConditions = {};
-    // init
-    this.fetchCurrentWeather('london').then(response => {
+    this.fetchCurrentWeather('toronto,on').then(response => {
       this.weatherConditions = response;
     }, err => {
       console.log(err);
