@@ -15,6 +15,23 @@ export class WeatherComponent {
   }
 
   ngOnInit() {
-      // init
+    this.weatherConditions = {};
+    // init
+    this.fetchCurrentWeather('london').then(response => {
+      this.weatherConditions = response;
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  fetchCurrentWeather(location: string) {
+    let promise = new Promise((resolve, reject) => {
+      this.weatherService.getCurent(location).subscribe(resp => {
+        resolve(resp);
+      }, err => {
+        reject(err);
+      });
+    });
+    return promise;
   }
 }
