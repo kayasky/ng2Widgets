@@ -22,6 +22,7 @@ const cr = {
 export class CurrencyComponent {
   amounts: Amount[];
   currencies: string[];
+  exchangeRates: any;
 
   constructor(private exchangeService: ExchangeService) {
     'ngInit';
@@ -61,19 +62,28 @@ export class CurrencyComponent {
     return promise;
   }
 
-  convertAmount(index: number, amounts: Amount[], fromValue: number, fromCurrency: string) {
-    this.getExchangeRates(fromCurrency).then(response => {
-      amounts.forEach((item: any, i) => {
-        if (i !== index) {
-          item.value = 0;
-          if (item.currency === fromCurrency) {
-            item.value = fromValue;
-          } else {
-            let converted = response.rates[item.currency] * fromValue;
-            item.value = converted.toFixed(precision);
-          }
+  convertAmountArray(index: number, amounts: Amount[], fromValue: number, fromCurrency: string) {
+    amounts.forEach((item: any, i) => {
+      if (i !== index) {
+        item.value = 0;
+        if (item.currency === fromCurrency) {
+          item.value = fromValue;
+        } else {
+          let converted = this.exchangeRates.rates[item.currency] * fromValue;
+          item.value = converted.toFixed(precision);
         }
-      });
+      }
+    });
+  }
+
+  convertAmount(index: number, amounts: Amount[], fromValue: number, fromCurrency: string) {
+    if (this.exchangeRates && (this.exchangeRates.base === fromCurrency)) {
+      this.convertAmountArray(index, amounts, fromValue, fromCurrency);
+      return;
+    }
+    this.getExchangeRates(fromCurrency).then(response => {
+      this.exchangeRates = response;
+      this.convertAmountArray(index, amounts, fromValue, fromCurrency);
     });
   }
 }
