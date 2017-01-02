@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.progress-bar {
+  height: 5px;
+}
+
+.widget-card {
+  width: 100%;
+  margin: 20px auto;
+
+  .md-card-header-text {
+    text-align: center;
+    margin: auto;
+  }
+
+  .md-list-item {
+    margin-bottom: 15px;
+  }
+}
+
+.list-item-cell {
+  margin-right: 20px;
+}

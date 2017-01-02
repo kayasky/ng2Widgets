@@ -12,6 +12,24 @@
           {{ weatherConditions?.main.temp | temperature:'C' }}
         </p>
       </md-list-item>
+      <md-list-item>
+        <h4 md-line>Temperature Min</h4>
+        <p md-line>
+          {{ weatherConditions?.main.temp_min | temperature:'C' }}
+        </p>
+      </md-list-item>
+      <md-list-item>
+        <h4 md-line>Temperature Max</h4>
+        <p md-line>
+          {{ weatherConditions?.main.temp_max | temperature:'C' }}
+        </p>
+      </md-list-item>
+      <md-list-item>
+        <h4 md-line>Humidity</h4>
+        <p md-line>
+          {{ weatherConditions?.main.humidity }}%
+        </p>
+      </md-list-item>
     </md-list>
   </md-card-content>
 
