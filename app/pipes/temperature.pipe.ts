@@ -12,12 +12,20 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TemperaturePipe implements PipeTransform {
   transform(value: number, unit: string = 'C'): string {
     let normalizedUnit = unit.toUpperCase();
-    let temp: string;
+    let tempNum: number;
+    let tempStr: string;
+
     if (normalizedUnit === 'C') {
-      temp = (value - 273.15).toFixed(0);
+      tempNum = value - 273.15;
     } else if (normalizedUnit === 'F') {
-      temp = ((value * 9 / 5) - 459.67).toFixed(0);
+      tempNum = (value * 9 / 5) - 459.67;
     }
-    return `${temp}°${normalizedUnit}`;
+
+    // Make sure there never a negative zero value
+    tempNum = ((-0.5 < tempNum) && (tempNum < 0.5)) ? Math.abs(tempNum) : tempNum;
+
+    // Remove any decimals
+    tempStr = (tempNum).toFixed(0);
+    return `${tempStr}°${normalizedUnit}`;
   }
 }
