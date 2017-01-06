@@ -26,4 +26,11 @@ describe('WeatherComponent', function() {
 
   it('should create component', () => expect(comp).toBeDefined());
 
+  describe('fetchCurrentWeather', () => {
+    it('should call the weatherService.getCurent method', () => {
+      // placeholder test
+      expect(true).toBeTruthy();
+    });
+  });
+
 });
